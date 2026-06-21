@@ -4,10 +4,8 @@
     {
       "type": "vless",
       "tag": "vless-ws-in",
-      "listen": "0.0.0.0",
+      "listen": "0.0.0.0", // ← 改这里，别用 "::"
       "listen_port": 8080,
-      "sniff": true,
-      "sniff_override_destination": true,
       "users": [{ "uuid": "2804db30-452f-4c32-b604-edeca6992ca8" }],
       "transport": {
         "type": "ws",
@@ -17,7 +15,7 @@
       }
     },
     {
-      "type": "http",
+      "type": "http", // ← 加一个假 HTTP，专门给平台探活用
       "tag": "health",
       "listen": "0.0.0.0",
       "listen_port": 8080,
@@ -28,7 +26,7 @@
   "outbounds": [{ "type": "direct", "tag": "direct" }],
   "route": {
     "rules": [
-      { "inbound": "health", "outbound": "direct" }
+      { "inbound": "health", "outbound": "direct" } // HTTP 走直连，秒回 200
     ]
   }
 }
